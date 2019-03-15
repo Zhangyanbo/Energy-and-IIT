@@ -5,14 +5,29 @@ import warnings
 import pyphi
 import pandas as pd
 import time
+import sys
 
 start = time.time()
 
-total_compute = 10080
-astep = total_compute // 5
+################
+# Terminal input:
+# **.py start end total filename
+# Note: the end is not included
+################
+
+start_index = int(sys.argv[1])
+end_index = int(sys.argv[2])
+total_num = int(sys.argv[3])
+phi_path = './data/' + sys.argv[4]
+
+print('Compute Phi from label', start_index, 'to', end_index)
+print(end_index - start_index, 'compute of', total_num, 'all computes.')
+
+#total_compute = 100
+astep = (end_index - start_index) // 10
 
 ising_path = './data/isingEnergy_0_10080.csv'
-phi_path = './data/Phi_0_10080.csv'
+#phi_path = './data/Phi_0_10080.csv'
 
 ##############Functions##############
 def ReverseBinCode(l):
@@ -163,7 +178,7 @@ def IsingEnergyExp(exp_m, show_process=True, step = 100, saveQ=False):
     ising_energy = []
     for st in range(0, len(exp_m), step):
         ising_energy += [IsingEnergy(MapToKarnaughMap(alabel)) for alabel in exp_m[st:st+step]]
-        print('ising energy:', st / len(exp_m) * 100, '%')
+        #print('ising energy:', st / len(exp_m) * 100, '%')
     print('done.')
     if saveQ:
         isingEnergyData = pd.DataFrame(ising_energy)
@@ -174,7 +189,7 @@ def IsingEnergyExp(exp_m, show_process=True, step = 100, saveQ=False):
     phis = []
     for st in range(0, len(exp_m), step):
         phis += [getphi(alabel) for alabel in exp_m[st:st+step]]
-        print('Phi:', st / len(exp_m) * 100, '%')
+        print('Phi:', (st + start_index + step) / total_num * 100, '%,', (st + step) / len(exp_m) * 100, '%','of this part')
         if saveQ:
             PhiData = pd.DataFrame(phis)
             PhiData.to_csv(phi_path)
@@ -187,10 +202,10 @@ def IsingEnergyExp(exp_m, show_process=True, step = 100, saveQ=False):
 #print(testIsing)
 
 #total_test = 1000
-isingEnergys, phis = IsingEnergyExp(all_labels[:total_compute], show_process=True, step=astep, saveQ=True)
+isingEnergys, phis = IsingEnergyExp(all_labels[start_index : end_index], show_process=True, step=astep, saveQ=True)
 
-isingEnergyData = pd.DataFrame(isingEnergys)
-isingEnergyData.to_csv(ising_path)
+#isingEnergyData = pd.DataFrame(isingEnergys)
+#isingEnergyData.to_csv(ising_path)
 
 PhiData = pd.DataFrame(phis)
 PhiData.to_csv(phi_path)
