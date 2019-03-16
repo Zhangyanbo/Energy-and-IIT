@@ -10,6 +10,8 @@ ntimes = 10
 each_time_compute = 20
 
 warnings.filterwarnings('ignore')
+#Disable followed line to show the time growing
+pyphi.config.PARALLEL_CUT_EVALUATION = False
 
 labels = ('A', 'B', 'C')
 m = [[0, 0, 0],
