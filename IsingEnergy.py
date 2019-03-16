@@ -197,18 +197,18 @@ def IsingEnergyExp(exp_m, show_process=True, step = 100, saveQ=False):
     
     return ising_energy, phis
 
-#testIsing, testPhi = IsingEnergyExp(all_labels[:total_compute], step = astep)
+def allEnergy(exp_m):
+    temp = [IsingEnergy(MapToKarnaughMap(alabel)) for alabel in exp_m]
+    return temp
 
-#print(testIsing)
+#isingEnergys, phis = IsingEnergyExp(all_labels[start_index : end_index], show_process=True, step=astep, saveQ=True)
 
-#total_test = 1000
-isingEnergys, phis = IsingEnergyExp(all_labels[start_index : end_index], show_process=True, step=astep, saveQ=True)
+#PhiData = pd.DataFrame(phis)
+#PhiData.to_csv(phi_path)
 
-#isingEnergyData = pd.DataFrame(isingEnergys)
-#isingEnergyData.to_csv(ising_path)
-
-PhiData = pd.DataFrame(phis)
-PhiData.to_csv(phi_path)
+isingEnergys = allEnergy(all_labels)
+isingEnergyData = pd.DataFrame(isingEnergys)
+isingEnergyData.to_csv('./data/isingEnergy_0_10080.csv')
 
 end = time.time()
 
