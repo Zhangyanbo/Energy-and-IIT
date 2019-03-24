@@ -1,0 +1,1892 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     74836,       1884]
+NotebookOptionsPosition[     72675,       1839]
+NotebookOutlinePosition[     73044,       1855]
+CellTagsIndexPosition[     73001,       1852]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"PhiData", "=", 
+   RowBox[{"Catenate", "@", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Import", "[", 
+           RowBox[{"FileNameJoin", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<data\>\"", 
+              ",", "\"\<all_phi\>\"", ",", 
+              RowBox[{"\"\<Phi_\>\"", "<>", "name", "<>", "\"\<.csv\>\""}]}], 
+             "}"}], "]"}], "]"}], "\[LeftDoubleBracket]", 
+          RowBox[{"2", ";;"}], "\[RightDoubleBracket]"}], "\[Transpose]"}], 
+        "\[LeftDoubleBracket]", 
+        RowBox[{"2", ";;"}], "\[RightDoubleBracket]"}], "\[Transpose]"}], 
+      "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"name", ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<0_1000\>\"", ",", "\"\<1000_2000\>\"", ",", "\"\<2000_3000\>\"",
+           ",", "\"\<3000_4000\>\"", ",", "\"\<4000_5000\>\"", ",", 
+          "\"\<5000_6000\>\"", ",", "\"\<6000_7000\>\"", ",", 
+          "\"\<7000_8000\>\"", ",", "\"\<8000_9000\>\"", ",", 
+          "\"\<9000_10080\>\""}], "}"}]}], "}"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SensitivityData", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<data\>\"", ",", 
+           "\"\<sensitivity.csv\>\""}], "}"}], "]"}], "]"}], 
+       "\[LeftDoubleBracket]", 
+       RowBox[{"2", ";;"}], "\[RightDoubleBracket]"}], "\[Transpose]"}], 
+     "\[LeftDoubleBracket]", 
+     RowBox[{"2", ";;"}], "\[RightDoubleBracket]"}], "\[Transpose]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.762378782511702*^9, 3.762378902005584*^9}, {
+  3.762378956586474*^9, 3.762379009938792*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"23d6226e-cd7e-44aa-b0af-93ee466bdddc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "PhiData", "]"}]], "Input",
+ CellChangeTimes->{{3.762378969937522*^9, 3.762378972013975*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"d77113e5-6b1c-4a53-9596-e27162ca41bc"],
+
+Cell[BoxData["10080"], "Output",
+ CellChangeTimes->{3.762378972260702*^9},
+ CellLabel->"Out[8]=",ExpressionUUID->"1a1d7ba4-5072-474f-a83e-875d3c7d6560"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PhiData", "\[LeftDoubleBracket]", "1", 
+  "\[RightDoubleBracket]"}]], "Input",
+ CellChangeTimes->{{3.7623790407222*^9, 3.762379041743546*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"13754372-2bab-4a03-9430-bdea13305602"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.1875`", ",", "0.1875`", ",", "2.3125`", ",", "0.687499`", ",", "0.1875`",
+    ",", "0.1875`"}], "}"}]], "Output",
+ CellChangeTimes->{3.762379041981008*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"a18f54ce-ffdd-4156-a834-3e85e7dd18bc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "SensitivityData", "]"}]], "Input",
+ CellChangeTimes->{{3.762379012647951*^9, 3.7623790137783403`*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"f69ddc40-9790-464c-8ead-2d44da043ef3"],
+
+Cell[BoxData["10080"], "Output",
+ CellChangeTimes->{3.762379013963799*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"2990740c-8085-4c1d-8717-6b89880b2b0b"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"S\[CapitalPhi]", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Mean", "[", 
+        RowBox[{
+        "SensitivityData", "\[LeftDoubleBracket]", "i", 
+         "\[RightDoubleBracket]"}], "]"}], ",", 
+       RowBox[{"Mean", "[", 
+        RowBox[{
+        "PhiData", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+        "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "PhiData", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.762379029796977*^9, 3.7623790788196917`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"877bb9b3-94ea-4aca-ac9f-6ac9f8af0246"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", "S\[CapitalPhi]", "]"}]], "Input",
+ CellChangeTimes->{{3.76237907995481*^9, 3.762379083874353*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"5c47f9b2-de1d-4e4b-b1e0-9a1c460edc97"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"SortBy", "[", 
+    RowBox[{
+     RowBox[{"Mean", "/@", 
+      RowBox[{"GatherBy", "[", 
+       RowBox[{"S\[CapitalPhi]", ",", "First"}], "]"}]}], ",", "First"}], 
+    "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "Full"}], ",", 
+   RowBox[{"PlotTheme", "\[Rule]", "\"\<Scientific\>\""}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<Sensitivity\>\"", ",", "\"\<Mean \[CapitalPhi]\>\""}], 
+     "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.762379109036323*^9, 3.762379150695056*^9}, {
+  3.762379281204842*^9, 3.762379281767397*^9}, {3.762379320425819*^9, 
+  3.7623793583070583`*^9}, {3.762379495631432*^9, 3.7623795243340273`*^9}},
+ CellLabel->"In[50]:=",ExpressionUUID->"fb90469c-24b4-4496-8e27-b8f8a61ac726"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGCQAWIQvXoVCAg4vH4j9iSD+bU9AxgIOohO+dVhyPjSPhQM
+BB0ut59ReL/qhT1EvaDDlC1TvnWteAVVL+QwnU/tTe/ex1D1Qg5fHd09L2c+
+g6oXcuhnytludu0FVL2wg4KkUsPLqa+h6oUd3BzTqs8IvIKqF3aY+CTJ7oUG
+zHwRB7kEjrLyizDzRRxCIkM3mtrA3CPiYJI6WaWe8xFUvajDC5XGz+cvwswb
+vv4DAEEls6I=
+    "], {{{}, {}, 
+      {RGBColor[0.9, 0.36, 0.054], PointSize[
+        NCache[
+         Rational[7, 360], 0.019444444444444445`]], AbsoluteThickness[1.6], 
+       CapForm["Butt"], 
+       LineBox[{15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28}]}}, {
+      {RGBColor[0.9, 0.36, 0.054], AbsolutePointSize[6], AbsoluteThickness[
+       1.6], CapForm["Butt"], 
+       PointBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+        14}]}, {}, {}}}], {}, {}, {}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{False, False},
+  AxesLabel->{None, None},
+  AxesOrigin->{4.149739583333333, 0.5487397313078705},
+  DisplayFunction->Identity,
+  Frame->{{True, True}, {True, True}},
+  FrameLabel->{{
+     FormBox["\"Mean \[CapitalPhi]\"", TraditionalForm], None}, {
+     FormBox["\"Sensitivity\"", TraditionalForm], None}},
+  FrameStyle->Automatic,
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{{0}, {0}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  LabelStyle->{FontFamily -> "Times"},
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{4.166666666666667, 5.25}, {0.5636592592592593, 
+   0.8620498182870371}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.762379112797442*^9, 3.762379151097939*^9}, 
+   3.7623792822708197`*^9, {3.762379322227437*^9, 3.762379358873798*^9}, {
+   3.762379496610785*^9, 3.762379524874419*^9}},
+ CellLabel->"Out[50]=",ExpressionUUID->"605b0dfb-c952-45de-81d6-ee955502b37c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"Median", "/@", 
+       RowBox[{"Partition", "[", 
+        RowBox[{"#", ",", "2"}], "]"}]}], ")"}], "&"}], "@", 
+    RowBox[{"SortBy", "[", 
+     RowBox[{
+      RowBox[{"Median", "/@", 
+       RowBox[{"GatherBy", "[", 
+        RowBox[{"S\[CapitalPhi]", ",", "First"}], "]"}]}], ",", "First"}], 
+     "]"}]}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "Full"}], ",", 
+   RowBox[{"PlotTheme", "\[Rule]", "\"\<Scientific\>\""}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<Sensitivity\>\"", ",", "\"\<Mean \[CapitalPhi]\>\""}], 
+     "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.762379373384655*^9, 3.762379390056189*^9}, {
+  3.762379451482638*^9, 3.762379467029614*^9}},
+ CellLabel->"In[46]:=",ExpressionUUID->"1b40f9a0-7ec6-4134-bca4-25c20c473895"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, 
+   GraphicsComplexBox[{{4.208333333333333, 0.8508129583333334}, {4.375, 
+    0.7995597916666666}, {4.541666666666667, 0.695759375}, {4.708333333333333,
+     0.86785525}, {4.875, 0.8479304583333334}, {5.041666666666667, 
+    0.6933930833333333}, {5.208333333333333, 0.7013555}, {4.208333333333333, 
+    0.8508129583333334}, {4.375, 0.7995597916666666}, {4.541666666666667, 
+    0.695759375}, {4.708333333333333, 0.86785525}, {4.875, 
+    0.8479304583333334}, {5.041666666666667, 0.6933930833333333}, {
+    5.208333333333333, 0.7013555}}, {{{}, {}, 
+      {RGBColor[0.9, 0.36, 0.054], PointSize[
+        NCache[
+         Rational[7, 360], 0.019444444444444445`]], AbsoluteThickness[1.6], 
+       CapForm["Butt"], LineBox[{8, 9, 10, 11, 12, 13, 14}]}}, {
+      {RGBColor[0.9, 0.36, 0.054], AbsolutePointSize[6], AbsoluteThickness[
+       1.6], CapForm["Butt"], 
+       PointBox[{1, 2, 3, 4, 5, 6, 7}]}, {}, {}}}], {}, {}, {}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{False, False},
+  AxesLabel->{None, None},
+  AxesOrigin->{4.192708333333333, 0.6846699749999999},
+  DisplayFunction->Identity,
+  Frame->{{True, True}, {True, True}},
+  FrameLabel->{{
+     FormBox["\"Mean \[CapitalPhi]\"", TraditionalForm], None}, {
+     FormBox["\"Sensitivity\"", TraditionalForm], None}},
+  FrameStyle->Automatic,
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{{0}, {0}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  LabelStyle->{FontFamily -> "Times"},
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{4.208333333333333, 5.208333333333333}, {0.6933930833333333, 
+   0.86785525}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.762379386704612*^9, 3.7623793907167797`*^9}, {
+  3.762379451917138*^9, 3.7623794674415293`*^9}},
+ CellLabel->"Out[46]=",ExpressionUUID->"fa124359-5dab-49ec-b55f-f65657746331"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SortBy", "[", 
+  RowBox[{
+   RowBox[{"Mean", "/@", 
+    RowBox[{"GatherBy", "[", 
+     RowBox[{"S\[CapitalPhi]", ",", "First"}], "]"}]}], ",", "First"}], 
+  "]"}]], "Input",
+ CellLabel->"In[35]:=",ExpressionUUID->"ff292e57-6692-4d73-8a50-948b88dae11d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["25", "6"], ",", "0.8441662268518518`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["17", "4"], ",", "0.7813956904761904`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["13", "3"], ",", "0.770865978298611`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["53", "12"], ",", "0.8330740753205128`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["9", "2"], ",", "0.6168889629629629`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["55", "12"], ",", "0.7004181319444444`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["14", "3"], ",", "0.7761491377314814`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["19", "4"], ",", "0.8620498182870371`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["29", "6"], ",", "0.8145506296296297`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["59", "12"], ",", "0.8174935549242425`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "0.6193196587873933`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["61", "12"], ",", "0.7573498214285714`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["31", "6"], ",", "0.5636592592592593`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["21", "4"], ",", "0.8381118541666668`"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.762379295772017*^9},
+ CellLabel->"Out[35]=",ExpressionUUID->"6b6c0bb8-282e-4381-b892-5a83fea4b05b"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"S", ",", "\[CapitalPhi]s"}], "}"}], "=", 
+   RowBox[{
+    RowBox[{"SortBy", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"#", "\[LeftDoubleBracket]", 
+           RowBox[{"1", ",", "1"}], "\[RightDoubleBracket]"}], ",", 
+          RowBox[{
+           RowBox[{"#", "\[Transpose]"}], "\[LeftDoubleBracket]", "2", 
+           "\[RightDoubleBracket]"}]}], "}"}], "&"}], "/@", 
+       RowBox[{"GatherBy", "[", 
+        RowBox[{"S\[CapitalPhi]", ",", "First"}], "]"}]}], ",", "First"}], 
+     "]"}], "\[Transpose]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.762379172677267*^9, 3.762379240596169*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"b7add028-f8c2-478a-a8ef-fe0dd801b764"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BoxWhiskerChart", "[", "\[CapitalPhi]s", "]"}]], "Input",
+ CellChangeTimes->{{3.762379242685223*^9, 3.762379246053206*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"dbeed0fb-d242-406d-a8ce-3a8544b8fd4a"],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {Opacity[0], 
+    PointBox[{{0.40484340802146573`, -0.085069325}, {14.320549640356326`, 
+     1.786455825}}]}, 
+   {RGBColor[0.982864, 0.7431472, 0.3262672], CapForm[None], {}, 
+    {RGBColor[0.982864, 0.7431472, 0.3262672], 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{0.5, 1.0215454166666667`}, {1.2253930483777906`, 
+             1.0215454166666667`}, {1.2253930483777906`, 
+             0.6690232500000001}, {0.5, 
+             0.6690232500000001}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{1.2253930483777906`, 0.8983291666666666}, {0.5, 
+              0.8983291666666666}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{0.8626965241888953, 0.6690232500000001}, {
+              0.8626965241888953, 0.3749993333333333}}, {{0.8626965241888953, 
+              1.0215454166666667`}, {0.8626965241888953, 1.3004615}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{1.0440447862833429`, 0.3749993333333333}, {
+              0.6813482620944477, 0.3749993333333333}}, {{1.0440447862833429`,
+               1.3004615}, {0.6813482620944477, 1.3004615}}}]}, {}}]},
+         ImageSizeCache->{{34.58578643762691, 
+          54.41421356237311}, {-49.41421356237309, 47.41421356237309}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], "1.3004615`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "1.0215454166666667`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8983291666666666`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.6690232500000001`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], 
+             "0.3749993333333333`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.3004615}, {
+            Style["75%", Bold], 1.0215454166666667`}, {
+            Style["median", Bold], 0.8983291666666666}, {
+            Style["25%", Bold], 0.6690232500000001}, {
+            Style["min", Bold], 0.3749993333333333}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{1.5, 0.971742}, {2.2253930483777906`, 0.971742}, {
+             2.2253930483777906`, 0.5589003333333333}, {1.5, 
+             0.5589003333333333}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{2.2253930483777906`, 0.80329675}, {1.5, 
+              0.80329675}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{1.8626965241888953`, 0.5589003333333333}, {
+              1.8626965241888953`, 0.}}, {{1.8626965241888953`, 0.971742}, {
+              1.8626965241888953`, 1.4681178333333336`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{2.044044786283343, 0.}, {1.6813482620944478`, 0.}}, {{
+              2.044044786283343, 1.4681178333333336`}, {1.6813482620944478`, 
+              1.4681178333333336`}}}]}, {}}]},
+         ImageSizeCache->{{56.58578643762691, 
+          76.4142135623731}, {-67.41421356237309, 85.41421356237309}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.4681178333333336`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], "0.971742`"}, {
+            
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.80329675`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.5589003333333333`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.4681178333333336`}, {
+            Style["75%", Bold], 0.971742}, {
+            Style["median", Bold], 0.80329675}, {
+            Style["25%", Bold], 0.5589003333333333}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{2.5, 0.9373501666666666}, {3.2253930483777906`, 
+             0.9373501666666666}, {3.2253930483777906`, 0.6265550000000001}, {
+             2.5, 0.6265550000000001}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{3.225393048377791, 0.7962394999999998}, {2.5, 
+              0.7962394999999998}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{2.8626965241888955`, 0.6265550000000001}, {
+              2.8626965241888955`, 0.}}, {{2.8626965241888955`, 
+              0.9373501666666666}, {2.8626965241888955`, 1.331493}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{3.0440447862833433`, 0.}, {2.6813482620944478`, 
+              0.}}, {{3.0440447862833433`, 1.331493}, {2.6813482620944478`, 
+              1.331493}}}]}, {}}]},
+         ImageSizeCache->{{78.58578643762691, 
+          98.4142135623731}, {-53.41421356237309, 85.41421356237309}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], "1.331493`"}, {
+            
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.9373501666666666`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.7962394999999998`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.6265550000000001`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.331493}, {
+            Style["75%", Bold], 0.9373501666666666}, {
+            Style["median", Bold], 0.7962394999999998}, {
+            Style["25%", Bold], 0.6265550000000001}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{3.5, 1.02234225}, {4.225393048377791, 1.02234225}, {
+             4.225393048377791, 0.6214365833333333}, {3.5, 
+             0.6214365833333333}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{4.225393048377791, 0.8028800833333334}, {3.5, 
+              0.8028800833333334}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{3.8626965241888955`, 0.6214365833333333}, {
+              3.8626965241888955`, 0.}}, {{3.8626965241888955`, 1.02234225}, {
+              3.8626965241888955`, 1.7013865}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{4.044044786283344, 0.}, {3.6813482620944478`, 0.}}, {{
+              4.044044786283344, 1.7013865}, {3.6813482620944478`, 
+              1.7013865}}}]}, {}}]},
+         ImageSizeCache->{{100.58578643762691`, 
+          120.4142135623731}, {-90.41421356237309, 85.41421356237309}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], "1.7013865`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "1.02234225`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8028800833333334`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.6214365833333333`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.7013865}, {
+            Style["75%", Bold], 1.02234225}, {
+            Style["median", Bold], 0.8028800833333334}, {
+            Style["25%", Bold], 0.6214365833333333}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{4.5, 0.8042351666666666}, {5.225393048377791, 
+             0.8042351666666666}, {5.225393048377791, 0.40740599999999993`}, {
+             4.5, 0.40740599999999993`}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{5.225393048377791, 0.6425339999999999}, {4.5, 
+              0.6425339999999999}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{4.8626965241888955`, 0.40740599999999993`}, {
+              4.8626965241888955`, 0.}}, {{4.8626965241888955`, 
+              0.8042351666666666}, {4.8626965241888955`, 1.2777765}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{5.044044786283344, 0.}, {4.681348262094447, 0.}}, {{
+              5.044044786283344, 1.2777765}, {4.681348262094447, 
+              1.2777765}}}]}, {}}]},
+         ImageSizeCache->{{122.5857864376269, 
+          142.4142135623731}, {-47.41421356237311, 85.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], "1.2777765`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.8042351666666666`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.6425339999999999`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.40740599999999993`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.2777765}, {
+            Style["75%", Bold], 0.8042351666666666}, {
+            Style["median", Bold], 0.6425339999999999}, {
+            Style["25%", Bold], 0.40740599999999993`}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{5.5, 0.8545373333333333}, {6.225393048377791, 
+             0.8545373333333333}, {6.225393048377791, 0.5584530833333334}, {
+             5.5, 0.5584530833333334}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{6.225393048377791, 0.74898475}, {5.5, 
+              0.74898475}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{5.8626965241888955`, 0.5584530833333334}, {
+              5.8626965241888955`, 0.}}, {{5.8626965241888955`, 
+              0.8545373333333333}, {5.8626965241888955`, 
+              1.1410601666666667`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{6.044044786283344, 0.}, {5.681348262094447, 0.}}, {{
+              6.044044786283344, 1.1410601666666667`}, {5.681348262094447, 
+              1.1410601666666667`}}}]}, {}}]},
+         ImageSizeCache->{{144.5857864376269, 
+          164.4142135623731}, {-33.41421356237311, 85.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.1410601666666667`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.8545373333333333`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.74898475`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.5584530833333334`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.1410601666666667`}, {
+            Style["75%", Bold], 0.8545373333333333}, {
+            Style["median", Bold], 0.74898475}, {
+            Style["25%", Bold], 0.5584530833333334}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{6.5, 1.0638294166666666`}, {7.225393048377791, 
+             1.0638294166666666`}, {7.225393048377791, 0.5105513333333334}, {
+             6.5, 0.5105513333333334}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{7.225393048377791, 0.8381931666666667}, {6.5, 
+              0.8381931666666667}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{6.8626965241888955`, 0.5105513333333334}, {
+              6.8626965241888955`, 0.}}, {{6.8626965241888955`, 
+              1.0638294166666666`}, {6.8626965241888955`, 
+              1.4143491666666668`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{7.044044786283344, 0.}, {6.681348262094447, 0.}}, {{
+              7.044044786283344, 1.4143491666666668`}, {6.681348262094447, 
+              1.4143491666666668`}}}]}, {}}]},
+         ImageSizeCache->{{166.5857864376269, 
+          186.4142135623731}, {-61.41421356237311, 85.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.4143491666666668`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "1.0638294166666666`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8381931666666667`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.5105513333333334`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.4143491666666668`}, {
+            Style["75%", Bold], 1.0638294166666666`}, {
+            Style["median", Bold], 0.8381931666666667}, {
+            Style["25%", Bold], 0.5105513333333334}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{7.5, 0.9749306666666666}, {8.225393048377791, 
+             0.9749306666666666}, {8.225393048377791, 0.7529518333333334}, {
+             7.5, 0.7529518333333334}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{8.225393048377791, 0.8975173333333333}, {7.5, 
+              0.8975173333333333}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{7.8626965241888955`, 0.7529518333333334}, {
+              7.8626965241888955`, 0.16319466666666665`}}, {{
+              7.8626965241888955`, 0.9749306666666666}, {7.8626965241888955`, 
+              1.2087481666666668`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{8.044044786283344, 0.16319466666666665`}, {
+              7.681348262094447, 0.16319466666666665`}}, {{8.044044786283344, 
+              1.2087481666666668`}, {7.681348262094447, 
+              1.2087481666666668`}}}]}, {}}]},
+         ImageSizeCache->{{188.5857864376269, 
+          208.4142135623731}, {-40.41421356237311, 69.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.2087481666666668`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.9749306666666666`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8975173333333333`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.7529518333333334`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], 
+             "0.16319466666666665`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.2087481666666668`}, {
+            Style["75%", Bold], 0.9749306666666666}, {
+            Style["median", Bold], 0.8975173333333333}, {
+            Style["25%", Bold], 0.7529518333333334}, {
+            Style["min", Bold], 0.16319466666666665`}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{8.5, 1.0332255}, {9.225393048377791, 1.0332255}, {
+             9.225393048377791, 0.5886061666666667}, {8.5, 
+             0.5886061666666667}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{9.22539304837779, 0.8631315833333333}, {8.5, 
+              0.8631315833333333}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{8.862696524188895, 0.5886061666666667}, {
+              8.862696524188895, 0.}}, {{8.862696524188895, 1.0332255}, {
+              8.862696524188895, 1.6412928333333336`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{9.044044786283342, 0.}, {8.681348262094447, 0.}}, {{
+              9.044044786283342, 1.6412928333333336`}, {8.681348262094447, 
+              1.6412928333333336`}}}]}, {}}]},
+         ImageSizeCache->{{210.5857864376269, 
+          230.4142135623731}, {-84.4142135623731, 85.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.6412928333333336`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], "1.0332255`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8631315833333333`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.5886061666666667`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.6412928333333336`}, {
+            Style["75%", Bold], 1.0332255}, {
+            Style["median", Bold], 0.8631315833333333}, {
+            Style["25%", Bold], 0.5886061666666667}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{9.5, 0.9707356666666667}, {10.225393048377791`, 
+             0.9707356666666667}, {10.225393048377791`, 0.6648186666666667}, {
+             9.5, 0.6648186666666667}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{10.22539304837779, 0.8327293333333334}, {9.5, 
+              0.8327293333333334}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{9.862696524188895, 0.6648186666666667}, {
+              9.862696524188895, 0.21851600000000002`}}, {{9.862696524188895, 
+              0.9707356666666667}, {9.862696524188895, 
+              1.4668403333333335`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{10.044044786283342`, 0.21851600000000002`}, {
+              9.681348262094447, 0.21851600000000002`}}, {{
+              10.044044786283342`, 1.4668403333333335`}, {9.681348262094447, 
+              1.4668403333333335`}}}]}, {}}]},
+         ImageSizeCache->{{232.5857864376269, 
+          252.4142135623731}, {-66.4142135623731, 63.41421356237311}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.4668403333333335`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.9707356666666667`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8327293333333334`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.6648186666666667`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], 
+             "0.21851600000000002`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.4668403333333335`}, {
+            Style["75%", Bold], 0.9707356666666667}, {
+            Style["median", Bold], 0.8327293333333334}, {
+            Style["25%", Bold], 0.6648186666666667}, {
+            Style["min", Bold], 0.21851600000000002`}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{10.5, 0.8093896666666667}, {11.225393048377791`, 
+             0.8093896666666667}, {11.225393048377791`, 
+             0.41600366666666666`}, {10.5, 
+             0.41600366666666666`}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{11.22539304837779, 0.6035201666666666}, {10.5, 
+              0.6035201666666666}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{10.862696524188895`, 0.41600366666666666`}, {
+              10.862696524188895`, 0.}}, {{10.862696524188895`, 
+              0.8093896666666667}, {10.862696524188895`, 1.493054}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{11.044044786283342`, 0.}, {10.681348262094447`, 
+              0.}}, {{11.044044786283342`, 1.493054}, {10.681348262094447`, 
+              1.493054}}}]}, {}}]},
+         ImageSizeCache->{{255.5857864376269, 
+          275.4142135623731}, {-69.4142135623731, 85.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], "1.493054`"}, {
+            
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.8093896666666667`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.6035201666666666`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.41600366666666666`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.493054}, {
+            Style["75%", Bold], 0.8093896666666667}, {
+            Style["median", Bold], 0.6035201666666666}, {
+            Style["25%", Bold], 0.41600366666666666`}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{11.5, 0.8509441666666667}, {12.225393048377791`, 
+             0.8509441666666667}, {12.225393048377791`, 0.66778175}, {11.5, 
+             0.66778175}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{12.22539304837779, 0.7832659999999999}, {11.5, 
+              0.7832659999999999}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{11.862696524188895`, 0.66778175}, {
+              11.862696524188895`, 0.3409603333333333}}, {{
+              11.862696524188895`, 0.8509441666666667}, {11.862696524188895`, 
+              1.2898243333333335`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{12.044044786283342`, 0.3409603333333333}, {
+              11.681348262094447`, 0.3409603333333333}}, {{
+              12.044044786283342`, 1.2898243333333335`}, {11.681348262094447`,
+               1.2898243333333335`}}}]}, {}}]},
+         ImageSizeCache->{{277.5857864376269, 
+          297.4142135623731}, {-48.41421356237311, 51.41421356237311}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.2898243333333335`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.8509441666666667`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.7832659999999999`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.66778175`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], 
+             "0.3409603333333333`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.2898243333333335`}, {
+            Style["75%", Bold], 0.8509441666666667}, {
+            Style["median", Bold], 0.7832659999999999}, {
+            Style["25%", Bold], 0.66778175}, {
+            Style["min", Bold], 0.3409603333333333}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{12.5, 0.7802418333333332}, {13.225393048377791`, 
+             0.7802418333333332}, {13.225393048377791`, 0.376445}, {12.5, 
+             0.376445}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{13.22539304837779, 0.5469645833333333}, {12.5, 
+              0.5469645833333333}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{12.862696524188895`, 0.376445}, {12.862696524188895`, 
+              0.}}, {{12.862696524188895`, 0.7802418333333332}, {
+              12.862696524188895`, 1.2039513333333334`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{13.044044786283342`, 0.}, {12.681348262094447`, 
+              0.}}, {{13.044044786283342`, 1.2039513333333334`}, {
+              12.681348262094447`, 1.2039513333333334`}}}]}, {}}]},
+         ImageSizeCache->{{299.5857864376269, 
+          319.4142135623731}, {-40.41421356237311, 85.4142135623731}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.2039513333333334`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.7802418333333332`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.5469645833333333`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], "0.376445`"}, {
+            
+             StyleBox["\"min\"", Bold, StripOnInput -> False], "0.`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.2039513333333334`}, {
+            Style["75%", Bold], 0.7802418333333332}, {
+            Style["median", Bold], 0.5469645833333333}, {
+            Style["25%", Bold], 0.376445}, {
+            Style["min", Bold], 0.}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.982864, 0.7431472, 0.3262672], 
+      TagBox[
+       TooltipBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          GraphicsGroupBox[{Antialiasing -> False, 
+            
+            PolygonBox[{{13.5, 0.9710214166666666}, {14.225393048377791`, 
+             0.9710214166666666}, {14.225393048377791`, 0.7228005833333333}, {
+             13.5, 0.7228005833333333}}], {}, {{}, {}}, {}, {
+             GrayLevel[0], 
+             GrayLevel[1], 
+             
+             LineBox[{{14.22539304837779, 0.8557464166666666}, {13.5, 
+              0.8557464166666666}}]}, {}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{13.862696524188895`, 0.7228005833333333}, {
+              13.862696524188895`, 0.5104169999999999}}, {{
+              13.862696524188895`, 0.9710214166666666}, {13.862696524188895`, 
+              1.0923464999999999`}}}]}, {
+             GrayLevel[0], 
+             GrayLevel[0.5], 
+             
+             LineBox[{{{14.044044786283342`, 0.5104169999999999}, {
+              13.681348262094447`, 0.5104169999999999}}, {{
+              14.044044786283342`, 1.0923464999999999`}, {13.681348262094447`,
+               1.0923464999999999`}}}]}, {}}]},
+         ImageSizeCache->{{321.5857864376269, 
+          341.4142135623731}, {-28.414213562373106`, 34.41421356237311}}],
+        StyleBox[
+         TagBox[
+          GridBox[{{
+             StyleBox["\"max\"", Bold, StripOnInput -> False], 
+             "1.0923464999999999`"}, {
+             StyleBox["\"75%\"", Bold, StripOnInput -> False], 
+             "0.9710214166666666`"}, {
+             StyleBox["\"median\"", Bold, StripOnInput -> False], 
+             "0.8557464166666666`"}, {
+             StyleBox["\"25%\"", Bold, StripOnInput -> False], 
+             "0.7228005833333333`"}, {
+             StyleBox["\"min\"", Bold, StripOnInput -> False], 
+             "0.5104169999999999`"}}, 
+           GridBoxAlignment -> {"Columns" -> {Center, ".", {Left}}}, 
+           AutoDelete -> False, GridBoxDividers -> {"Columns" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}, "Rows" -> {
+               Directive[
+                GrayLevel[0.3]], {
+                Directive[
+                 GrayLevel[0.3]]}, 
+               Directive[
+                GrayLevel[0.3]]}}, 
+           GridBoxFrame -> {
+            "ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> GrayLevel[0]}}, 
+           GridBoxItemSize -> {
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaseStyle -> 
+           Directive[
+             AbsoluteThickness[1], 
+             Dashing[{}]]], "Grid"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Grid[{{
+            Style["max", Bold], 1.0923464999999999`}, {
+            Style["75%", Bold], 0.9710214166666666}, {
+            Style["median", Bold], 0.8557464166666666}, {
+            Style["25%", Bold], 0.7228005833333333}, {
+            Style["min", Bold], 0.5104169999999999}}, Dividers -> {{
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}, {
+             Directive[
+              GrayLevel[0.3]], {
+              Directive[
+               GrayLevel[0.3]]}, 
+             Directive[
+              GrayLevel[0.3]]}}, Alignment -> {{Center, ".", {Left}}}, Frame -> 
+          GrayLevel[0], BaseStyle -> Directive[
+            AbsoluteThickness[1], 
+            Dashing[{}]]], {}], 
+        "Tooltip"]& ]}}, {}, {}}, {{{{{{{}, {}}, {}}, {{{}, {}}, {}}, {{{}, \
+{}}, {}}, {{{}, {}}, {}}, {{{}, {}}, {}}, {{{}, {}}, {}}, {{{}, {}}, {}}, \
+{{{}, {}}, {}}, {{{}, {}}, {}}, {{{}, {}}, {}}, {{{}, {}}, {}}, {{{}, {}}, \
+{}}, {{{}, {}}, {}}, {{{}, {}}, {}}}, {}}, {}}, {}}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{False, False},
+  AxesLabel->{None, None},
+  AxesOrigin->{-0.1862696524188896, -0.085069325},
+  DisplayFunction->Identity,
+  Frame->True,
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {{{0.8626965241888953, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      1.8626965241888953`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      2.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      3.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      4.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      5.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      6.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      7.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      8.862696524188895, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      9.862696524188895, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      10.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      11.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      12.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      13.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {0.5, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0, 0}}, {
+      14.225393048377791`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0, 0}}}, {{
+      0.8626965241888953, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      1.8626965241888953`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      2.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      3.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      4.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      5.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      6.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      7.8626965241888955`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      8.862696524188895, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      9.862696524188895, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      10.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      11.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      12.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+      13.862696524188895`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {0.5, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0, 0}}, {
+      14.225393048377791`, 
+       FormBox[
+        TemplateBox[{0}, "Spacer1"], TraditionalForm], {0, 0}}}}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  PlotRangePadding->{{
+     Scaled[0.05], 
+     Scaled[0.05]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{{{0.8626965241888953, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     1.8626965241888953`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     2.8626965241888955`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     3.8626965241888955`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     4.8626965241888955`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     5.8626965241888955`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     6.8626965241888955`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     7.8626965241888955`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     8.862696524188895, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     9.862696524188895, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     10.862696524188895`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     11.862696524188895`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     12.862696524188895`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {
+     13.862696524188895`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0.008, 0}}, {0.5, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0, 0}}, {
+     14.225393048377791`, 
+      FormBox[
+       TemplateBox[{0}, "Spacer1"], TraditionalForm], {0, 0}}}, 
+    Automatic}]], "Output",
+ CellChangeTimes->{3.7623792463953733`*^9},
+ CellLabel->"Out[33]=",ExpressionUUID->"14466082-bfda-427f-a7d6-b15176b0920b"]
+}, Open  ]]
+},
+WindowSize->{808, 851},
+WindowMargins->{{Automatic, 136}, {-121, Automatic}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (2018\:5e743\
+\:670828\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2023, 51, 199, "Input",ExpressionUUID->"23d6226e-cd7e-44aa-b0af-93ee466bdddc"],
+Cell[CellGroupData[{
+Cell[2606, 75, 209, 3, 30, "Input",ExpressionUUID->"d77113e5-6b1c-4a53-9596-e27162ca41bc"],
+Cell[2818, 80, 152, 2, 34, "Output",ExpressionUUID->"1a1d7ba4-5072-474f-a83e-875d3c7d6560"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3007, 87, 245, 4, 30, "Input",ExpressionUUID->"13754372-2bab-4a03-9430-bdea13305602"],
+Cell[3255, 93, 279, 6, 34, "Output",ExpressionUUID->"a18f54ce-ffdd-4156-a834-3e85e7dd18bc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3571, 104, 220, 3, 30, "Input",ExpressionUUID->"f69ddc40-9790-464c-8ead-2d44da043ef3"],
+Cell[3794, 109, 153, 2, 34, "Output",ExpressionUUID->"2990740c-8085-4c1d-8717-6b89880b2b0b"]
+}, Open  ]],
+Cell[3962, 114, 723, 20, 30, "Input",ExpressionUUID->"877bb9b3-94ea-4aca-ac9f-6ac9f8af0246"],
+Cell[4688, 136, 218, 3, 30, "Input",ExpressionUUID->"5c47f9b2-de1d-4e4b-b1e0-9a1c460edc97"],
+Cell[CellGroupData[{
+Cell[4931, 143, 863, 19, 52, "Input",ExpressionUUID->"fb90469c-24b4-4496-8e27-b8f8a61ac726"],
+Cell[5797, 164, 2230, 54, 282, "Output",ExpressionUUID->"605b0dfb-c952-45de-81d6-ee955502b37c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8064, 223, 945, 24, 73, "Input",ExpressionUUID->"1b40f9a0-7ec6-4134-bca4-25c20c473895"],
+Cell[9012, 249, 2326, 53, 248, "Output",ExpressionUUID->"fa124359-5dab-49ec-b55f-f65657746331"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11375, 307, 276, 7, 30, "Input",ExpressionUUID->"ff292e57-6692-4d73-8a50-948b88dae11d"],
+Cell[11654, 316, 1582, 46, 129, "Output",ExpressionUUID->"6b6c0bb8-282e-4381-b892-5a83fea4b05b"]
+}, Open  ]],
+Cell[13251, 365, 803, 21, 30, "Input",ExpressionUUID->"b7add028-f8c2-478a-a8ef-fe0dd801b764"],
+Cell[CellGroupData[{
+Cell[14079, 390, 226, 3, 30, "Input",ExpressionUUID->"dbeed0fb-d242-406d-a8ce-3a8544b8fd4a"],
+Cell[14308, 395, 58351, 1441, 237, "Output",ExpressionUUID->"14466082-bfda-427f-a7d6-b15176b0920b"]
+}, Open  ]]
+}
+]
+*)
+
